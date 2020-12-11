@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container my-5">
+  <div class="alert alert-info" role="alert">
+    You have successfully logged out
+    <a href="{% url 'main:login' %}">Login again</a>
+  </div>
+</div>
+{% endblock body %}

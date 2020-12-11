@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+<!-- Font awesome -->
+{% load fontawesome_5 %}
+{% block body %}
+{% load paystack %}
+{% include "main/messages.html" %}  <!-- Login message -->
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+
+      <div class="jumbotron text-center">
+        <p>
+          Becoming a {{ package_name }} user automatically qualifies you
+          for double bonus on this platform, from Refer Bonus to Login Bonus and
+          many more.
+        </p>
+        {% if user_package %}
+        <button type="button" class="btn btn-info btn-lg"name="button">
+          You are a Premium Member
+        </button>
+        {% else %}
+         <p>Pay &#8358;&nbsp;{{ package_price }} now to become a {{ package_name }} user</p>
+          {% paystack_button amount=package_price  email=user_email %}
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+<!-- Font awesome -->
+{% load static %}
+{% load fontawesome_5 %}
+{% block body %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      {% include "main/messages.html" %}
+    </div>
+  </div>
+</div>
+<div class="container py-5">
+  <div class="row justify-content-center">
+
+    <div class="col-sm-12 col-md-10">
+      <div class="row justify-content-center">
+        <div class="image-view-container">
+          <img class="image-view"src="{{ image.image_url }}" alt="Image View">
+          <p class="counter"></p>
+          <h1>{{ image.image_title }}</h1>
+          <p>{{ image.comment|safe }}</p>
+        </div>
+      </div>
+      <div class="row justify-content-center py-5">
+        <!-- <h1 class="px-5 py-1" style="color:white; background:black;">Ads Here</h1> -->
+        <a href="http://www.altermass.com" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="90" data-original-width="728" src="https://1.bp.blogspot.com/-XFc0sMerbbM/Xx2Vt6qHQLI/AAAAAAAAAm4/LaVKCNARFp8MbNYLRLYZmXd_bslXcDMfQCLcBGAsYHQ/s728/workonline.png" /></a>
+      </div>
+
+      <div class="row justify-content-center security-panel">
+
+        <!-- <div class="row"> -->
+        <!-- </div> -->
+        <div class="captcha-chat">
+            <div class="captcha-container media">
+                <!-- <div class="media-body"> -->
+                <!-- </div> -->
+                <div id="captcha">
+                  <p class="security">Security Check</p>
+
+                    <div class="controls">
+                      <input class="user-text btn-common" placeholder="Type here" type="text" />
+                        <input name="image_id"  type="hidden" value="{{ image.pk }}"/>
+                        <button class="validate btn-common">
+                            <!-- this image should be converted into inline svg -->
+                            <img src="{% static 'images/captcha_imgs/enter_icon.png' %}" alt="submit icon">
+                        </button>
+                        <button class="refresh btn-common">
+                            <!-- this image should be converted into inline svg -->
+                            <img src="{% static 'images/captcha_imgs/refresh_icon.png' %}" alt="refresh icon">
+                        </button>
+                        <p class="wrong info">Wrong!, please try again.</p>
+                    </div>
+                </div>
+                <!-- <p class="wrong info">Wrong!, please try again.</p> -->
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $("document").ready(function(){
+
+    $(".security-panel").hide()
+    let timerObj = {
+      count:0
+    }
+
+    $.ajax({
+      type: 'GET',
+      url: "/images/countdown/",
+      data:{},
+      // dataType: "JSON",
+      success: function (response) {
+        // var data = JSON.parse(response)
+        console.log(response.countdown);
+        timerObj.count = response.countdown;
+      },
+      error: function (response) {
+        //alert the error if any error occured
+        console.log(response["responseJSON"]["error"]);
+      }
+    });
+
+    let counter = $(".counter");
+
+    function perfCount(){
+      if (timerObj.count > 0){
+        timerObj.count -= 1;
+        counter.html(timerObj.count);
+        if (timerObj.count === 0){
+          clearInterval(countDown);
+          // alert("Time out");
+          $(".security-panel").show()
+
+        }
+      }
+
+    }
+    let countDown = setInterval(perfCount, 1000);
+
+
+    var timeout; //global timout variable that holds reference to timer
+
+    var captcha = new $.Captcha({
+        onFailure: function() {
+
+            $(".captcha-chat .wrong").show({
+                duration: 30,
+                done: function() {
+                    var that = this;
+                    clearTimeout(timeout);
+                    $(this).removeClass("shake");
+                    $(this).css("animation");
+                    //Browser Reflow(repaint?): hacky way to ensure removal of css properties after removeclass
+                    $(this).addClass("shake");
+                    var time = parseFloat($(this).css("animation-duration")) * 1000;
+                    timeout = setTimeout(function() {
+                        $(that).removeClass("shake");
+                    }, time);
+                }
+            });
+
+        },
+
+        onSuccess: function() {
+
+            let imageId = $("input[name=image_id]").val();
+
+            $.ajax({
+              type: 'GET',
+              url: "/images/image-proccess/",
+              data:{"imageId":imageId},
+              // dataType: "JSON",
+              success: function (response) {
+                // var data = JSON.parse(response)
+                alert(response.message);
+                window.location="/images/"
+                // timerObj.count = response.countdown;
+              },
+              error: function (response) {
+                //alert the error if any error occured
+                console.log(response["responseJSON"]["error"]);
+              }
+            });
+        }
+    });
+
+    captcha.generate();
+
+  });
+</script>
+{% endblock body %}

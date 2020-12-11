@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+<!-- Font awesome -->
+{% load fontawesome_5 %}
+{% load static %}
+{% block body %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      {% include "main/messages.html" %}
+    </div>
+  </div>
+</div>
+<div class="container-fluid header">
+  <div class="row">
+    <div class="col h-left">
+      <div class="text-center">
+        <h1>WELCOME</h1>
+        <h1>TO</h1>
+        <h1>SIMPLEREFERS</h1>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="text-center h-right">
+        <p>
+          Get 500 Naira Signup Bonus!
+          30% when a referral upgrade!
+          Unlimited Referrer Access!
+          No Experience required!
+          No Specific Participant!
+          Easy to setup and Money Making. Upgrade Fee ₦1,000
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="text-center py-5 px-5">
+    <p>A new innovating and internet networking site, where you will be referred to do some simple job activities, by which you will be referring people to join you through your referral link.
+
+Ordinary members get ₦100 per each refers while premium members get paid ₦200 per each refer and 30% on each Referral upgrade and new member get ₦500 sign-up bonus, and you will be paid reward for any job activities done instantly in your account, after performing any of the job's activities listed in the FAQ page, either by Commenting on survey questions, post shared or adverts, Like survey questions, post shared or adverts, Daily login, invite people to join you through your referral link ...</p>
+  </div>
+</div>
+<div class="py-3" style="background-color:#f8f9fa!important;">
+  <div class="container">
+    <div class="text-center">
+      <h1 class="sub-header-text">HOW TO GET STARTED</h1>
+    </div>
+    <div class="row my-5">
+      <div class="col card-container">
+
+        <!-- <div class="step-card">
+          <p>{% fa5_icon 'credit-card' 'fab' %}</p>
+          <p>Register</p>
+        </div> -->
+        <img id="signupcard" class="hwt-card" src="{% static 'images/vector/signupcard.svg' %}" alt="signupcard">
+      </div>
+      <div class="col card-container">
+        <img id="logincard" class="hwt-card" src="{% static 'images/vector/logincard.svg' %}" alt="logincard">
+
+      </div>
+    </div>
+    <div class="row my-5">
+      <div class="col card-container">
+        <img id="refercard" class="hwt-card" src="{% static 'images/vector/refercard.svg' %}" alt="refercard">
+
+      </div>
+      <div class="col card-container">
+        <img id="earncard" class="hwt-card" src="{% static 'images/vector/earncard.svg' %}" alt="earncard">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

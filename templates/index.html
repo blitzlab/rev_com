@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+<!-- Hero Section -->
+<div class="position-relative bg-primary overflow-hidden">
+  <div class="container position-relative z-index-2 space-top-3 space-top-md-4 space-bottom-3 space-bottom-md-4">
+    <div class="w-md-80 w-xl-60 text-center mx-md-auto">
+      <div class="mb-7">
+        <h1 class="display-4 text-white mb-4">Faster and easier way to earn online</h1>
+        <p class="lead text-white mb-4">You earn as much as 500k perday simply by refering friends and family</p>
+      </div>
+      <a class="btn btn-light btn-wide transition-3d-hover" href="#signup">Start Now</a>
+      <a class="btn text-white" href="{% url 'main:contact' %}">Get in Touch <i class="fas fa-angle-right fa-sm ml-1"></i></a>
+    </div>
+  </div>
+
+  <!-- SVG Shapes -->
+  <figure class="position-absolute top-0 left-0 w-60">
+    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1246 1078">
+      <g opacity=".4">
+        <linearGradient id="doubleEllipseTopLeftID1" gradientUnits="userSpaceOnUse" x1="2073.5078" y1="1.7251" x2="2273.4375" y2="1135.5818" gradientTransform="matrix(-1 0 0 1 2600 0)">
+          <stop class="stop-color-primary-lighter" offset="0.4976" style="stop-color:#19A0FF"/>
+          <stop class="stop-color-primary" offset="1" style="stop-color:#00c201"/>
+        </linearGradient>
+        <polygon fill="url(#doubleEllipseTopLeftID1)" points="519.8,0.6 0,0.6 0,1078 863.4,1078   "/>
+        <linearGradient id="doubleEllipseTopLeftID2" gradientUnits="userSpaceOnUse" x1="1717.1648" y1="3.779560e-05" x2="1717.1648" y2="644.0417" gradientTransform="matrix(-1 0 0 1 2600 0)">
+          <stop class="stop-color-primary-lighter" offset="1.577052e-06" style="stop-color:#19A0FF"/>
+          <stop class="stop-color-primary" offset="1" style="stop-color:#00c201"/>
+        </linearGradient>
+        <polygon fill="url(#doubleEllipseTopLeftID2)" points="519.7,0 1039.4,0.6 1246,639.1 725.2,644   "/>
+      </g>
+    </svg>
+  </figure>
+  <figure class="position-absolute right-0 bottom-0 left-0 mb-n1">
+    <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1920 100.1">
+      <path fill="#fff" d="M0,0c0,0,934.4,93.4,1920,0v100.1H0L0,0z"/>
+    </svg>
+  </figure>
+  <!-- End SVG Shapes -->
+</div>
+<!-- End Hero Section -->
+
+
+
+
+<!-- Icon Blocks Section -->
+<div class="container space-2">
+  <!-- Title -->
+  <div class="w-md-80 w-lg-50 text-center mx-md-auto mb-5 mb-md-9">
+    <span class="d-block small font-weight-bold text-cap mb-2">Benefits</span>
+    <h2 class="h1">How it works</h2>
+  </div>
+  <!-- End Title -->
+
+  <div class="row">
+    <div class="col-md-4 mb-5 mb-md-0">
+      <!-- Icon Blocks -->
+      <div class="text-center px-lg-3">
+        <figure class="max-w-10rem mx-auto mb-4">
+          <img class="img-fluid" src="{% static 'svg/icons/icon-45.svg' %}" alt="SVG">
+        </figure>
+        <h3>Signup</h3>
+        <p>Our registration process is very easy and straight</p>
+      </div>
+      <!-- End Icon Blocks -->
+    </div>
+
+    <div class="col-md-4 mb-5 mb-md-0">
+      <!-- Icon Blocks -->
+      <div class="text-center px-lg-3">
+        <figure class="max-w-10rem mx-auto mb-4">
+          <img class="img-fluid" src="{% static 'svg/icons/icon-29.svg' %}" alt="SVG">
+        </figure>
+        <h3>Verify email <br /> and login</h3>
+        <p>Get your unique referal link by logging in to your profile</p>
+      </div>
+      <!-- End Icon Blocks -->
+    </div>
+
+    <div class="col-md-4">
+      <!-- Icon Blocks -->
+      <div class="text-center px-lg-3">
+        <figure class="max-w-10rem mx-auto mb-4">
+          <img class="img-fluid" src="{% static 'svg/icons/icon-31.svg' %}" alt="SVG">
+        </figure>
+        <h3>Invite<br>and earn</h3>
+        <p>Share your referal link with people and earn when they signup</p>
+      </div>
+      <!-- End Icon Blocks -->
+    </div>
+  </div>
+</div>
+<!-- End Icon Blocks Section -->
+
+<!-- Hero Section -->
+
+<div id="signup" class="container position-relative z-index-4 space-top-2 space-top-md-4 space-top-lg-3">
+  <div class="row justify-content-lg-between align-items-lg-center">
+    <div class="col-md-10 col-lg-5 mb-9 mb-lg-0">
+      <div class="mb-7">
+        <!-- <h1 class="display-4 mb-4">Build your perfect startup</h1> -->
+        <p class="lead">Get 500 Naira Signup Bonus! 30% when a referral upgrade! Unlimited Referrer Access! No Experience required! No Specific Participant! Easy to setup and Money Making.</p>
+      </div>
+
+      <img class="img-fluid" src="{% static 'svg/illustrations/we-are-in-office-1.svg' %}" alt="Image Description">
+    </div>
+
+    <div class="col-lg-6">
+      <!-- Form   action="{% url 'main:signup' %}" -->
+      <form id="ajax-signup" class="js-validate card shadow-lg" method="post">
+        {% csrf_token %}
+        <div id="signup-message">
+
+        </div>
+        <div class="card-header bg-light text-center py-4 px-5 px-md-6">
+          <h2 class="h4 mb-0">Register for <span class="text-body font-size-1 font-weight-bold">free</span></h2>
+        </div>
+
+        <div class="card-body p-4 p-md-6">
+          <div class="row">
+            <div class="col-sm-6 mb-3">
+              <!-- Form Group -->
+              <div class="js-form-message form-group">
+                <label for="first_name" class="input-label">First name</label>
+                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Nataly" aria-label="Nataly" required
+                       data-msg="Please enter first your name">
+              </div>
+              <!-- End Form Group -->
+            </div>
+
+            <div class="col-sm-6 mb-3">
+              <!-- Form Group -->
+              <div class="js-form-message form-group">
+                <label for="last_name" class="input-label">Last name</label>
+                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Gaga" aria-label="Gaga" required
+                       data-msg="Please enter last your name">
+              </div>
+              <!-- End Form Group -->
+            </div>
+
+            <div class="col-sm-12 mb-3">
+              <!-- Form Group -->
+              <div class="js-form-message form-group">
+                <label for="emailAddress" class="input-label">Email address</label>
+                <input type="email" class="form-control" name="email" id="emailAddress" placeholder="nayagaga@pixeel.com" aria-label="alex@pixeel.com" required
+                       data-msg="Please enter a valid email address">
+              </div>
+              <!-- End Form Group -->
+            </div>
+
+            <div class="col-sm-6 mb-3">
+              <!-- Form Group -->
+              <div class="js-form-message form-group">
+                <label for="password1" class="input-label">Password</label>
+                <input type="password" class="form-control" name="password1" id="password1" autocomplete="new-password" placeholder="*********" aria-label="*********" required
+                       data-msg="Your password is invalid. Please try again">
+              </div>
+              <!-- End Form Group -->
+            </div>
+
+            <div class="col-sm-6 mb-3">
+              <!-- Form Group -->
+              <div class="js-form-message form-group">
+                <label for="confirmPassword" class="input-label">Confirm password</label>
+                <input type="password" class="form-control" name="password2" autocomplete="new-password" id="confirmPassword" placeholder="*********" aria-label="*********" required
+                       data-msg="Password does not match the confirm password">
+              </div>
+              <!-- End Form Group -->
+            </div>
+          </div>
+          <input type="hidden" name="refid" id="id_refid" value="None">
+          <!-- Checkbox -->
+          <!-- <div class="js-form-message mb-5">
+            <div class="custom-control custom-checkbox d-flex align-items-center text-muted">
+              <input type="checkbox" class="custom-control-input" id="termsCheckbox" name="termsCheckbox" required
+                     data-msg="Please accept our Terms and Conditions.">
+              <label class="custom-control-label" for="termsCheckbox">
+                <small>
+                  I agree to the
+                  <a class="link-underline" href="#">Terms and Conditions</a>
+                </small>
+              </label>
+            </div>
+          </div> -->
+          <!-- End Checkbox -->
+
+          <button id="ajax-signup-submit" type="submit" class="btn btn-block btn-primary transition-3d-hover">
+            Register
+            <i class="fas fa-angle-right fa-sm ml-1"></i>
+          </button>
+        </div>
+      </form>
+      <!-- End Form -->
+    </div>
+  </div>
+</div>
+<!-- End Hero Section -->
+{% endblock body %}

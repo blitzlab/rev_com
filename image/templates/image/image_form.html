@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{# Load crispy form for better form rendering #}
+{% load crispy_forms_tags %}
+{% load static %}
+<div class="container m-5">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <h5 class="text-center">Add new image</h5>
+      <p>Bonus &#8358;{{ bonus }}</p>
+      <hr class="mb-5">
+      <form method="post">
+        {% include "main/messages.html" %}
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="row justify-content-center">
+          {% if pending_images == 0 %}
+           <input type="submit" class="btn btn-primary btn-md" name="submit" value="Submit">
+          {% else %}
+          <input type="submit" class="btn btn-primary btn-md" name="submit" value="Submit" disabled>
+          {% endif %}
+        </div>
+      </form>
+    </div>
+    {% if my_images %}
+    <table class="table table-bordered mt-5">
+  <thead>
+    <tr>
+      <th scope="col">Date/Time</th>
+      <th scope="col">Image Title</th>
+      <th scope="col">Image</th>
+      <th scope="col">Image Type</th>
+      <th scope="col">Status</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {% for image in my_images %}
+    <tr>
+
+      <td>{{ image.date_published }}</td>
+      <td>{{ image.image_title }}</td>
+      <td><img style="width:50px; height:50px;" src="{{ image.image_url }}" alt="My Image"></td>
+      <td>{{ image.image_type }}</td>
+      <td>
+        {% if image.approved and image.status == "Approved" %}
+          Approved
+        {% elif not image.approved and image.status == "Pending" %}
+          Pending
+        {% elif not image.approved and image.status == "Rejected" %}
+          Rejected
+        {% endif %}
+      </td>
+      <td>
+        {% if image.approved %}
+        <img style="width:50px; height:50px;" class="img-responsive" width = "100%" src="{% static 'images/vector/check-mark.svg' %}" alt="Check Mark Icon">
+        {% else %}
+          <a href="{% url 'image:image_delete' image.pk %}"><img style="width:50px; height:50px;" class="img-responsive" width = "100%" src="{% static 'images/vector/delete-cross.svg' %}" alt="Delete Cross Icon"></a>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+  </div>
+</div>
+
+{% endblock body %}

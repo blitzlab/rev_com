@@ -1,0 +1,23 @@
+{% autoescape off %}
+Hi {{ admin }},
+
+Message was sent by a user from Simple Refer.<br/>
+Below is the message details
+
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <th scope="row">Sender</th>
+      <td>{{ sender_name }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Sender Email</th>
+      <td>{{ sender_email }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Message</th>
+      <td>{{ message }}</td>
+    </tr>
+  </tbody>
+</table>
+{% endautoescape %}

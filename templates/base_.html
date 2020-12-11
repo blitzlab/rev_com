@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+{# Load the tag library #}
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+<!-- {# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %} -->
+
+<!-- Font awesome -->
+<!-- {% load fontawesome_5 %} -->
+
+{% load static %}
+
+
+<html lang="en" dir="ltr">
+  <head>
+    <script data-ad-client="ca-pub-8836429185600979" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171568120-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-171568120-1');
+    </script>
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description"
+          content="Simplerefers is a new innovating and internet networking site, where you will be referred to do some simple job activities, by which you will be referring people to join you through your referral link.">
+    <meta name="keywords"
+          content="Earn, make money, online work, work online, online job, refer, Money, 50,000 per week, get rich, easy money">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Simple Refers - Innovating and internet networking site</title>
+    {% fontawesome_5_static %}
+    <link rel="stylesheet" href="{% static 'css/master.css' %}"/>
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}"/>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand" href="{% url 'main:index' %}"><img id="logo" src="{% static 'images/logos/logo.jpg' %}" alt="logo"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'main:index' %}">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'main:about' %}">ABOUT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'main:contact' %}">CONTACT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'main:faq' %}">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'main:blog' %}">FORUM</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'image:images' %}">IMAGE</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'main:profile' user.pk %}">{{ user.username }}</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'main:logout' %}">LOGOUT</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'main:login' %}">LOGIN</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'main:signup' %}">REGISTER</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+    {% if user.is_authenticated %}
+    <div class="user-login-nav">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <span id="wallet-balance" class="nav-user-login">Wallet Balance <span class="badge badge-secondary p-2">&#8358;&nbsp;{{ wallet_balance }}</span> </span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-user-login" href="{% url 'main:upgrade' %}">Upgrade</a>
+          </li>
+          <li class="nav-item">
+            <span id="get_referal_link" data-username="{{ user.username }}" class="nav-user-login" data-url="{% url 'main:referal_link' %}">Referal Link</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-user-login" href="{% url 'main:profile' user.pk %}">Profile</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- referal link modal start -->
+      <div class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+              <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- referal link modal end -->
+    </div>
+
+    {% endif %}
+    {% block body %}
+    {% endblock body %}
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col">
+          <!-- <img class="img-responsive" width = "100%" src="{% static 'images/teller.jpg' %}" alt="earncard"> -->
+          <a href="http://www.altermass.com/jobs.php" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img width = "100%" border="0" data-original-height="250" data-original-width="350" src="https://1.bp.blogspot.com/-gvLlGNrQ3K4/Xw3EuVrdHjI/AAAAAAAAAmA/lstLjFFftrcg-atJydtZY3ryPWcSR6iBgCLcBGAsYHQ/s1600/altermass-banner1.png" /></a>
+        </div>
+        <div class="col">
+          <!-- <img class="img-responsive" width = "100%" src="{% static 'images/teller.jpg' %}" alt="earncard"> -->
+          <a href="http://www.altermass.com" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img width = "100%" border="0" data-original-height="250" data-original-width="350" src="https://1.bp.blogspot.com/-pZ-Y3ydvqrc/Xw3EutZFbYI/AAAAAAAAAmI/Gs6lmKXacLIiseigbebLIFxytR3iTl3RwCLcBGAsYHQ/s1600/altermass-banner.png" /></a>
+        </div>
+        <div class="col">
+          <!-- <img class="img-responsive" width = "100%" src="{% static 'images/teller.jpg' %}" alt="earncard"> -->
+          <a href="http://www.mieword.com" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img width = "100%" border="0" data-original-height="250" data-original-width="350" src="https://1.bp.blogspot.com/-MCdkDsxGa1Q/Xw3Eug9tk5I/AAAAAAAAAmE/lz4Ohly0bCoujOQd9ZmIvumN7VcPDjp4gCLcBGAsYHQ/s1600/mieword-banner.png" /></a>
+        </div>
+      </div>
+    </div>
+    <footer class="navbar navbar-expand-lg navbar-light fixed-bottom bg-light position-sticky mt-5">
+      <a class="navbar-brand" href="{% url 'main:index' %}"><img id="logo" src="{% static 'images/logos/logo.jpg' %}" alt="logo"></a>
+
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" style="color:black;" href="{% url 'main:index' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="color:black;" href="{% url 'main:about' %}">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="color:black;" href="{% url 'main:contact' %}">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="color:black;" href="{% url 'main:faq' %}">faq</a>
+        </li>
+      </ul>
+
+      <p class="navbar-nav ml-auto text-center" style="color:black;">
+        <a style="color:black;" href="#">SimpleRefers.com</a> <span style="color:black;">&nbsp;| Copyright 2020. All Right Reserved</span>
+      </p>
+    </footer>
+    <script src="{% static 'js/master.js'%}" charset="utf-8"></script>
+    <script src="{% static 'js/Captcha/js/client_captcha.js'%}" charset="utf-8"></script>
+  </body>
+</html>

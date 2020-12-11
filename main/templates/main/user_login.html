@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{# Load crispy form for better form rendering #}
+{% load crispy_forms_tags %}
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-md-8 col-lg-7 col-xl-6 offset-md-2 offset-lg-2 offset-xl-3 space-2">
+      <!-- Title -->
+        <div class="mb-5 mb-md-7">
+          <h1 class="h2">Welcome back</h1>
+          <p>Login to manage your account.</p>
+        </div>
+        <!-- End Title -->
+      <hr class="mb-5">
+
+      <form action="{% url 'main:login' %}" class="js-validate" method="post">
+        <!-- {% include "main/messages.html" %} -->
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+          <div class="alert alert-soft-warning" role="alert">
+        {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+        <!-- <div class="fieldWrapper js-form-message form-group">
+            <label class="input-label" for="{{ form.username.id_for_label }}">Email Address</label>
+            {{ form.username }}
+            {{ form.username.errors }}
+        </div>
+        <div class="fieldWrapper js-form-message form-group">
+            <label class="input-label" for="{{ form.password.id_for_label }}" tabindex="0">
+              <span class="d-flex justify-content-between align-items-center">
+              Password
+              <a class="link-underline text-capitalize font-weight-normal" href="{% url 'main:forgot-password' %}">Forgot Password?</a>
+            </span>
+            </label>
+
+            {{ form.password }}
+            {{ form.password.errors }}
+        </div> -->
+        <div class="js-form-message form-group">
+          <label for="id_username" class="input-label" for="signinSrEmail">Email address</label>
+          <input type="email" class="form-control" autocapitalize="none" autocomplete="username" name="username" id="signinSrEmail id_username" tabindex="1" placeholder="Email address" aria-label="Email address" required
+                 data-msg="Please enter a valid email address." aria-invalid="false">
+        </div>
+        <!-- End Form Group -->
+
+        <!-- Form Group -->
+        <div class="js-form-message form-group">
+          <label class="input-label" for="signinSrPasswordExample2 id_password" tabindex="0">
+            <span class="d-flex justify-content-between align-items-center">
+              Password
+              <a class="link-underline text-capitalize font-weight-normal" href="{% url 'main:forgot-password' %}">Forgot Password?</a>
+            </span>
+          </label>
+          <input type="password" class="form-control" name="password" id="signinSrPasswordExample2 id_password" tabindex="2" placeholder="********" aria-label="********" required
+                 data-msg="Your password is invalid. Please try again.">
+        </div>
+        <!-- End Form Group -->
+        <div class="row align-items-center mb-5">
+          <div class="col-sm-6 mb-3 mb-sm-0">
+            <span class="font-size-1 text-muted">Don't have an account?</span>
+            <a class="font-size-1 font-weight-bold" href="{% url 'main:signup' %}">Signup</a>
+          </div>
+
+          <div class="col-sm-6 text-sm-right">
+            <button type="submit" class="btn btn-primary transition-3d-hover">Login</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

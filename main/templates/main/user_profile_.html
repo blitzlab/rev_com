@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+<!-- Font awesome -->
+{% load fontawesome_5 %}
+{% block body %}
+{% load paystack %}
+{% load crispy_forms_tags %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center stats-panel py-1">
+    <div class="col stats-column text-center">
+      <h4>Registered Today</h4>
+      <p>{{ today_referred }}</p>
+    </div>
+    <div class="col stats-column text-center">
+      <h4>Total Registered</h4>
+      <p>{{ total_referred }}</p>
+    </div>
+    <div class="col stats-column text-center">
+      <h4>Total Premium</h4>
+      <p>{{ premium_user }}</p>
+    </div>
+    <div class="col stats-column text-center">
+      <h4>Total Earnings</h4>
+      <p>&#8358;&nbsp;{{ all_ernings }}</p>
+    </div>
+  </div>
+  <div class="row my-5">
+    <div class="col-md-4">
+      <div class="jumbotron">
+        <h4>User Information</h4>
+        <form method="post">
+          {% if messages %}
+            {% for message in messages %}
+              {% if "profile_updated" in message.tags %}
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  {{ message }}
+                </div>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+          {% csrf_token %}
+          {{ form|crispy }}
+          <!-- {{ other_data|crispy }} -->
+          <div class="row justify-content-center">
+            <input type="submit" class="btn btn-primary btn-md" name="update_profile" value="Update Profile">
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col text-center">
+          <p>Withdrawal Type: <strong>Opay, Bank transfer</strong></p>
+        </div>
+        <div class="col text-center">
+          <p>Minimum Withdrawal: <strong>&#8358;&nbsp;{{ minimum_withdraw_amount }}</strong></p>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-6">
+          <form action="/withdraw-request/" method="post">
+            {% if messages %}
+              {% for message in messages %}
+                {% if "withdraw_submitted_message" in message.tags %}
+                  <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                  </div>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+            {% csrf_token %}
+            {{ withdraw_form|crispy }}
+            <div class="row justify-content-center">
+              <input type="submit" class="btn btn-primary btn-md" name="request_withdraw" value="Request Withdraw">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

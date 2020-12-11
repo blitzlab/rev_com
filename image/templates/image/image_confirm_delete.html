@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{# Load crispy form for better form rendering #}
+{% load crispy_forms_tags %}
+{% load static %}
+<div class="container m-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form method="post">
+        {% csrf_token %}
+          <p>Are you sure you want to delete "{{ object.image_title }}"?</p>
+          <input class="btn btn-danger btn-md" type="submit" value="Confirm">
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

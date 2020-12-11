@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+<!-- Font awesome -->
+{% load fontawesome_5 %}
+{% block body %}
+{% include "main/messages.html" %}  <!-- Login message -->
+
+<div class="container">
+  <div class="row justify-content-center py-5">
+    <div class="col-sm-12 col-md-10">
+      <p>
+        Simplerefers is a new innovating and internet networking site, where you will be referred to do some simple job activities, by which you will be referring people to join you through your referral link.
+      </p>
+      <p>
+        Ordinary members get ₦100 per each refers while premium members get paid ₦200 per each refer and 30% on each Referral upgrade and new member get ₦500 sign-up bonus, and you will be paid reward for any job activities done instantly in your account, after performing any of the job's activities listed in the FAQ page, either by Commenting on survey questions, post shared or adverts, Like survey questions, post shared or adverts, Daily login, invite people to join you through your referral link, e.t.c.
+      </p>
+      <p>
+        The service will approve the status for your payout, then you will be paid for your work done via Opay, Cheque or direct to your bank account. The other Payment options will be including soon.
+      </p>
+      <p>
+        You have to create account with us to start now and login to your account, and do your work and you will be really great after using our service.
+      </p>
+      <p>
+        You can also promote your products, sites, blogs, apps, referral links here with every cheap price, through the use of Banner, Flyer and Links.
+      </p>
+      <p>
+        For more about the site activities please check on the FAQ menu or <a class="btn btn-info" href="{% url 'main:faq' %}">Click Here.</a>
+      </p>
+      <h4>Guarantee you, You will earn upto ₦50,000 in your first week by simple work of 1 - 2 hours </h4>
+    </div>
+    <h6 style="color:red" class="text-center">
+      For you to be part of this Great Opportunity,
+      All you need to do is to join us through the Create Account Button and you are good to go.
+    </h6>
+    <a class="btn btn-success" href="{% url 'main:signup' %}">Create Account</a>
+  </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+<!-- Font awesome -->
+{% load static %}
+{% load fontawesome_5 %}
+{% block body %}
+{% if messages %}
+  {% for message in messages %}
+    {% if "image_submitted" or "warn" in message.tags %}
+      <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+
+    <div class="col-sm-12 col-md-10">
+      <div class="row justify-content-center">
+        <a href="{% url 'image:add_image' %}" class="btn btn-primary">Add Image</a>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    {% if images %}
+      {% for image in images %}
+      <div class="col-md-3 col-sm-6 action-images-container py-3">
+        <img class="action-image" src="{{ image.image.image_url }}" alt="earncard">
+        <!-- {{image.viewed}} -->
+          <div class="row justify-content-between px-3">
+            {% if image.viewed %}
+              Viewed
+            {% else %}
+              <a href="{% url 'image:image_detail' image.image.pk %}">View</a>
+            {% endif %}
+          <p>₦{{ reward }}</p>
+        </div>
+        <p>{{ image.image.comment|slice:":85"|safe }}...</p>
+      </div>
+      {% empty %}
+          <h4>No images yet.</h4>
+      {% endfor %}
+    {% endif %}
+
+  </div>
+  <div class="row justify-content-center">
+    <p>Come back in an hour later for another set of images.</p>
+  </div>
+</div>
+
+{% endblock body %}
+
+<!-- Show the image they have viewed (You can view it if you are not the one that viewed it)
+Chow the image nobody has Viewed
+show the image you viewed but not allow you to review it again -->

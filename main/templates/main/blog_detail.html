@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+<!-- Font awesome -->
+{% load static %}
+{% load fontawesome_5 %}
+{% block body %}
+{% load crispy_forms_tags %}
+<!-- {% include "main/messages.html" %}  <!-- Login message -->
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-sm-12 col-md-10">
+      <div class="blog-single-header text-center">
+        {% if object.featured_image %}
+          <img class="blog-header-img" src="{{ object.featured_image.url }}" alt="featured image">
+        {% endif %}
+        <h4 class="blog-title">{{ object.title }}</h4>
+      </div>
+      <div class="blog-meta my-3">
+        <span class="badge badge-light"><img class="like" data-blog_slug="{{ object.slug }}" src="{% static 'images/vector/nolike.svg' %}" alt=""><span>{{ like_count }}</span></span>
+        <span class="badge badge-light"><img class="blog-meta-icon" src="{% static 'images/vector/user.svg' %}" alt=""> {{ object.author }}</span>
+        <span class="badge badge-light"><img class="blog-meta-icon" src="{% static 'images/vector/comment.svg' %}" alt=""> {{ comment_count }}</span>
+      </div>
+
+        {{ object.text|safe }}
+
+      <p style="color:tomato">Get &#8358;&nbsp;{{ comment_bonus }} on your first comment</p>
+      <div class="container">
+        <div class="row">
+          <form action="{% url 'main:comment' %}" method="post">
+            <div class="row">
+            {% if messages %}
+              {% for message in messages %}
+                {% if "comment_published" in message.tags %}
+                  <div class="alert {{ message.tags }}" role="alert">
+                    {{ message }}
+                  </div>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+            </div>
+            <div class="container">
+              <div class="row">
+                {% csrf_token %}
+                {{ comment_form|crispy }}
+                <div id="submit-comment">
+                  <button type="submit" class="btn btn-secondary ml-2 submit-comment-button">Submit</button>
+                  <p class="comment-delay"></p>
+
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        {% if comments %}
+          {% for comment in comments %}
+          <div class="comment px-5 jumbotron">
+          <div class="d-flex justify-content-between">
+            <strong><img class="blog-meta-icon" src="{% static 'images/vector/user.svg' %}" alt=""> {{ comment.user }}</strong>
+            <p><strong>Published on: </strong>{{ comment.commented_on }}</p>
+          </div>
+          <div class="row">
+            <p class="pl-5">{{ comment.comment }}</p>
+          </div>
+          </div>
+          {% endfor %}
+
+      {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $("document").ready(function(){
+    //alert("hi");
+    $(".submit-comment-button").attr("disabled", true);
+    let timerObj = {
+      count:0
+    }
+
+    $.ajax({
+      type: 'GET',
+      url: "/images/countdown/",
+      data:{},
+      // dataType: "JSON",
+      success: function (response) {
+        // var data = JSON.parse(response)
+        console.log(response.countdown);
+        timerObj.count = response.countdown;
+      },
+      error: function (response) {
+        //alert the error if any error occured
+        console.log(response["responseJSON"]["error"]);
+      }
+    });
+
+    let counter = $(".comment-delay");
+
+    function perfCount(){
+      if (timerObj.count > 0){
+        timerObj.count -= 1;
+        counter.html(timerObj.count);
+        if (timerObj.count === 0){
+          clearInterval(countDown);
+          //alert("Time out");
+          counter.hide()
+          $(".submit-comment-button").attr("disabled", false);
+
+
+        }
+      }
+
+    }
+    let countDown = setInterval(perfCount, 1000);
+  });
+</script>
+{% endblock body %}

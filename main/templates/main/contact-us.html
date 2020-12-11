@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+<!-- Font awesome -->
+{% load fontawesome_5 %}
+{% block body %}
+{# Load crispy form for better form rendering #}
+{% load crispy_forms_tags %}
+<div class="container m-5">
+  <div class="row justify-content-center">
+    <div id="contact">
+      <span></span>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-6 col-sm-12 text-center">
+      <h5>Call our business line</h5>
+      <p>+2348025509246</p>
+      <p>+2348097934402</p>
+      <p></p>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <div class="jumbotron">
+        <h5 class="text-center">Send Us Email</h5>
+        <form id="contact-form" method="post">
+          {% include "main/messages.html" %}
+          {% csrf_token %}
+          {{ form|crispy }}
+          <div class="row justify-content-center">
+            <input type="submit" class="btn btn-primary btn-md" id="contact-sub" name="send_email" value="Send">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

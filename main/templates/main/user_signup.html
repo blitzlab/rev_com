@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-md-8 col-lg-7 col-xl-6 offset-md-2 offset-lg-2 offset-xl-3 space-2">
+      <div class="mb-5 mb-md-7">
+         <h1 class="h2">Welcome to SimpleRefers</h1>
+         <p>Fill out the form to get started.</p>
+       </div>
+      <hr class="mb-5">
+      {% if refid != "None" %}
+      <div class="alert alert-info" role="alert">
+        You are registering through {{domain}}/refer/{{refid}}
+      </div>
+      {% endif %}
+      <form method="post" class="js-validate">
+        {% include "main/messages.html" %}
+        {% csrf_token %}
+
+
+
+
+
+        <!--  -->
+        <!-- Form Group -->
+        <div class="js-form-message form-group">
+          <label class="input-label" for="signinSrEmailExample1">First name</label>
+          <input type="text" class="form-control" name="first_name" id="signinSrEmailExample1" placeholder="First name" aria-label="First name" required
+                 data-msg="Please enter your first name.">
+        </div>
+        <!-- End Form Group -->
+
+        <!-- Form Group -->
+        <div class="js-form-message form-group">
+          <label class="input-label" for="signinSrEmailExample2">Last name</label>
+          <input type="text" class="form-control" name="last_name" id="signinSrEmailExample2" placeholder="Last name" aria-label="Last name" required
+                 data-msg="Please enter your last name.">
+        </div>
+        <!-- End Form Group -->
+
+        <!-- Form Group -->
+        <div class="js-form-message form-group">
+          <label class="input-label" for="signinSrEmailExample3">Username</label>
+          <input type="text" class="form-control" name="username" id="signinSrEmailExample3" placeholder="Username" aria-label="Username" required
+                 data-msg="Please enter your username.">
+        </div>
+        <!-- End Form Group -->
+
+        <!-- Form Group -->
+        <div class="js-form-message form-group">
+          <label class="input-label" for="signinSrEmailExample4">Email address</label>
+          <input type="email" class="form-control" name="email" id="signinSrEmailExample4" placeholder="Email address" aria-label="Email address" required
+                 data-msg="Please enter a valid email address.">
+        </div>
+        <!-- End Form Group -->
+
+
+        <!-- Form Group -->
+        <div class="js-form-message form-group">
+          <label class="input-label" for="signinSrEmailExample5">Phone number</label>
+          <input type="text" class="form-control" name="phone_number" id="signinSrEmailExample5" placeholder="Phone number" aria-label="Phone number" required
+                 data-msg="Please enter a valid phone number.">
+        </div>
+        <!-- End Form Group -->
+
+        <!-- Form Group -->
+        <div class="js-form-message form-group">
+          <label class="input-label" for="signinSrEmailExample6">Gender</label>
+          <select class="form-control" name="gender" id="signinSrEmailExample6" aria-label="Gender" required
+                 data-msg="Please select gender.">
+           <option value selected>------</option>
+           <option value="M">Male</option>
+           <option value="F">Female</option>
+           <option value="O">Other</option>
+          </select>
+          </div>
+
+        <!-- End Form Group -->
+
+
+        <!-- Form Group -->
+        <div class="js-form-message form-group">
+          <label class="input-label" for="signinSrEmailExample7">Country</label>
+          <input type="text" class="form-control" maxlength="20" name="country" id="signinSrEmailExample7" placeholder="Country" aria-label="Country" required
+                 data-msg="Please enter a country.">
+        </div>
+        <!-- End Form Group -->
+
+
+        <!-- Form Group -->
+        <div class="js-form-message form-group">
+          <label class="input-label" for="signinSrPasswordExample1">Password</label>
+          <input type="password" class="form-control" name="password1" autocomplete="new-password" id="signinSrPasswordExample1" placeholder="********" aria-label="********" required
+                 data-msg="Your password is invalid. Please try again.">
+                 <span class="helptext">
+                   <ul>
+                     <li>Your password can’t be too similar to your other personal information.</li>
+                     <li>Your password must contain at least 8 characters.</li>
+                     <li>Your password can’t be a commonly used password.</li>
+                     <li>Your password can’t be entirely numeric.</li>
+                   </ul>
+                 </span>
+        </div>
+        <!-- End Form Group -->
+
+        <!-- Form Group -->
+        <div class="js-form-message form-group">
+          <label class="input-label" for="signinSrConfirmPassword">Confirm password</label>
+          <input type="password" class="form-control" name="password2" autocomplete="new-password" id="signinSrConfirmPassword" placeholder="********" aria-label="********" required
+                 data-msg="Password does not match the confirm password.">
+          <span class="helptext">Enter the same password as before, for verification.</span>
+        </div>
+        <input type="hidden" name="refid" value="None">
+        <!-- End Form Group -->
+        <!--  -->
+
+
+
+        <!-- Button -->
+        <div class="row align-items-center mb-5">
+          <div class="col-sm-6 mb-3 mb-sm-0">
+            <span class="font-size-1 text-muted">Already have an account?</span>
+            <a class="font-size-1 font-weight-bold" href="{% url 'main:login' %}">Login</a>
+          </div>
+
+          <div class="col-sm-6 text-sm-right">
+            <button type="submit" class="btn btn-primary transition-3d-hover">Get Started</button>
+          </div>
+        </div>
+        <!-- End Button -->
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

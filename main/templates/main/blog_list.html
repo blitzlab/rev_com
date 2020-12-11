@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+<!-- Font awesome -->
+{% load static %}
+{% load fontawesome_5 %}
+{% block body %}
+{% include "main/messages.html" %}  <!-- Login message -->
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-sm-12 col-md-10">
+      {% for article in object %}
+      <div class="blog-card my-4">
+        {% if article.featured_image %}
+        <img class="fetured-image" src="{{ article.featured_image.url }}" alt="featured image">
+        {% endif %}
+        <div class="blog-text">
+          <div class="blog-title">
+            <h4><a class="blog-title-link" href="{% url 'main:blog-detail' article.slug %}">{{ article.title }}</a></h4>
+          </div>
+          <div class="blog-desc">
+            {{ article.text|slice:":255"|safe }}
+          </div>
+          <div class="blog-meta">
+            <span class="badge badge-secondary px-3">Comments: {{ article.comment_count }}</span>
+            <span class="badge badge-secondary px-3">Author: {{ article.author }}</span>
+            <span class="badge badge-secondary px-3">Published on: {{ article.published_on|date }}</span>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+          <h4>No articles yet.</h4>
+      {% endfor %}
+
+      <div class="row justify-content-center">
+        {% if is_paginated %}
+          <ul class="pagination">
+            {% if page_obj.has_previous %}
+              <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in paginator.page_range %}
+              {% if page_obj.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+              {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+              <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+          </ul>
+        {% endif %}
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+{% endblock body %}
